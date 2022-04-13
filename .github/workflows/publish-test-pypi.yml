@@ -10,7 +10,10 @@ name: Upload Python Package To Test Pypi
 
 on:
   release:
-    types: [ prereleased ]
+    tags:
+      - 'v[0-9]+\.[0-9]+\.[0-9]+\-beta\.[0-9]+$'
+    types:
+      - created
 
 jobs:
   deploy:
@@ -20,10 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+      - name: Set up Python
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
