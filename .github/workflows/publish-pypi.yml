@@ -30,7 +30,7 @@ jobs:
 
       - name: Change Version
         run: |
-          ./changeVersion.sh ${{ github.ref }}
+          echo ${{ github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v3
