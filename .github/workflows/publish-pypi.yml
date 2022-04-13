@@ -10,10 +10,6 @@ name: Upload Python Package To Pypi
 
 on:
   release:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-    tags-ignore:
-      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
     types:
       - created
 
@@ -24,6 +20,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Check Tag
+        id: check-tag
+        run: |
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo ::set-output name=state::true
+          else
+            echo ::set-output name=state::false
+          fi
 
       - name: Change Version
         run: |
@@ -44,6 +49,13 @@ jobs:
           python setup.py sdist bdist_wheel
 
       - name: Publish package
+        if: steps.check-tag.outputs.state == 'true'
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+
+      - name: Publish Test package
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
