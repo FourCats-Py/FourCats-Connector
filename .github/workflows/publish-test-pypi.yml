@@ -7,13 +7,8 @@
 # documentation.
 
 name: Upload Python Package
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+
+on: [pull_request, push]
 
 jobs:
   deploy:
