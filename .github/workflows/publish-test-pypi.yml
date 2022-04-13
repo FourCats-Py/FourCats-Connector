@@ -10,6 +10,8 @@ name: Upload Python Package To Test Pypi
 
 on:
   release:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
     types:
       - created
 
