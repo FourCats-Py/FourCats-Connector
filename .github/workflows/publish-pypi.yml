@@ -26,8 +26,6 @@ jobs:
         run: |
           if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo ::set-output name=state::true
-          else
-            echo ::set-output name=state::false
           fi
 
       - name: Change Version
