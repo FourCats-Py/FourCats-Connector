@@ -11,7 +11,7 @@ name: Upload Python Package To Pypi
 on:
   release:
     tags:
-      - '^v\d+.\d+.\d+$'
+      - '!*.*.*-beta.*'
     types:
       - created
 
