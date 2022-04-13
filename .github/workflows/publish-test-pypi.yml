@@ -23,7 +23,8 @@ jobs:
 
       - name: Change Version
         run: |
-          ./changeVersion.sh ${{ github.event.ref }}
+          echo ${{ GITHUB_REF }}
+          ./changeVersion.sh ${{ GITHUB_REF }}
 
       - name: Set up Python
         uses: actions/setup-python@v3

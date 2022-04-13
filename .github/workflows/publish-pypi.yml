@@ -11,7 +11,7 @@ name: Upload Python Package To Pypi
 on:
   release:
     tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+$'
+      - '^v\d+.\d+.\d+$'
     types:
       - created
 
@@ -25,7 +25,8 @@ jobs:
 
       - name: Change Version
         run: |
-          ./changeVersion.sh ${{ github.event.ref }}
+          echo ${{ GITHUB_REF }}
+          ./changeVersion.sh ${{ GITHUB_REF }}
 
       - name: Set up Python
         uses: actions/setup-python@v3
