@@ -11,7 +11,7 @@ name: Upload Python Package To Pypi
 on:
   release:
     tags-ignore:
-      - 'v*.*-beta.*'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
     types:
       - created
 
