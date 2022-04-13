@@ -9,9 +9,8 @@
 name: Upload Python Package To Test Pypi
 
 on:
-  push:
-    branches: [ develop ]
-  pull_request:
+  release:
+    types: [created]
     branches: [ develop ]
 
 jobs:
