@@ -10,7 +10,8 @@ name: Upload Python Package To Pypi
 
 on:
   release:
-    types: [ released ]
+    types:
+      - created
 
 jobs:
   deploy:
@@ -20,10 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -37,4 +38,4 @@ jobs:
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@master
         with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
