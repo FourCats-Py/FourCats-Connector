@@ -10,8 +10,7 @@ name: Upload Python Package To Test Pypi
 
 on:
   release:
-    types: [created]
-    branches: [ develop ]
+    types: [ prereleased ]
 
 jobs:
   deploy:
