@@ -3,6 +3,9 @@
 tag=${1##*/}
 version=$(echo $tag | grep -E "^v.+\d+$")
 
+echo $tag
+echo $version
+
 if [[ $? -eq 0 ]]; then
   version=${version:1}
 else
