@@ -1,13 +1,13 @@
 #!/bin/bash
 
 tag=${1##*/}
-version=$(echo $tag | grep -E "^v.+\d+$")
+regVersion=$(echo $tag | grep -E "^v.+\d+$")
 
 echo $tag
-echo $version
+echo $regVersion
 
 if [[ $? -eq 0 ]]; then
-  version=${version:1}
+  version=${regVersion:1}
 else
   exit 1
 fi
