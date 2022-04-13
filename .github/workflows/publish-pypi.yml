@@ -10,8 +10,8 @@ name: Upload Python Package To Pypi
 
 on:
   release:
-    tags:
-      - '!*.*.*-beta.*'
+    tags-ignore:
+      - '*.*.*-beta.*'
     types:
       - created
 
@@ -25,7 +25,6 @@ jobs:
 
       - name: Change Version
         run: |
-          echo ${{ github.ref }}
           ./changeVersion.sh ${{ github.ref }}
 
       - name: Set up Python
