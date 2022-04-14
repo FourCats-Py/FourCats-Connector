@@ -2,19 +2,10 @@
 baseName=$(basename "$1")
 
 if [[ "$baseName" =~ "beta" ]]; then
-  echo "包含 beta"
-  echo "$baseName"
-  echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$"
-  version=$(echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$")
-  echo "$version"
+  version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+$")
 else
-  echo "不包含 beta"
-  echo "$baseName"
-  version=$(echo "$baseName" | grep -E "^v\d+.\d+.\d+$")
-  echo "$version"
+  version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+$")
 fi
-
-echo "$version"
 
 if [[ "$version" == "" ]]; then
   echo "No version number matched."
