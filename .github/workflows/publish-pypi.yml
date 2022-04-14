@@ -34,7 +34,7 @@ jobs:
 
           echo $baseName
 
-          if [ $baseName =~ "beta" ]; then
+          if [[ $baseName =~ "beta" ]]; then
             version=$(echo $baseName | grep -E "^v\d+.\d+.\d+-beta.\d+$")
           else
             version=$(echo $baseName | grep -E "^v\d+.\d+.\d+$")
@@ -42,9 +42,9 @@ jobs:
 
           echo $version
 
-          if [ $version =  "" ]; then
+          if [[ $version ==  "" ]]; then
             echo "No version number matched."
-            exit 8
+            exit 1
           fi
 
           version=${version:1}
