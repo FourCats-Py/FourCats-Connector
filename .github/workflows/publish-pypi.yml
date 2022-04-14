@@ -47,8 +47,8 @@ jobs:
           cat fourcats_connector/__init__.py
 
           cd ..
-          tarName="FourCats-Connector-$baseName.tar.gz"
-          zipName="FourCats-Connector-$baseName.zip"
+          tarName="FourCats-Connector-$version.tar.gz"
+          zipName="FourCats-Connector-$version.zip"
           tar -zcvf $tarName ./FourCats-Connector
           zip -r -q $zipName ./FourCats-Connector
           cp $tarName ./FourCats-Connector/$tarName
