@@ -29,6 +29,8 @@ jobs:
           zipName="FourCats-Connector-1-$baseName.zip"
           tar -zcvf $tarName ./FourCats-Connector
           zip -r -q $zipName ./FourCats-Connector
+          cp $tarName ./FourCats-Connector/$tarName
+          cp zipName ./FourCats-Connector/zipName
           echo ::set-output name=tarName::$tarName name=zipName::$zipName
 
       - name: Upload Tar
@@ -41,7 +43,7 @@ jobs:
       - name: Upload Zip
         uses: JasonEtco/upload-to-release@master
         with:
-          args: echo ${{ steps.pack.outputs.zipName }} application/octet-stream
+          args: ${{ steps.pack.outputs.zipName }} application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
