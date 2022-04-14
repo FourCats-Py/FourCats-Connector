@@ -30,6 +30,7 @@ jobs:
 
       - name: Change Version
         run: |
+          chmod +x changeVersion.sh
           ./changeVersion.sh ${{ github.ref }}
 
       - name: Set up Python
