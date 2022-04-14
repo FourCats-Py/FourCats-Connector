@@ -30,7 +30,26 @@ jobs:
 
       - name: Change Version
         run: |
-          /bin/bash changeVersion.sh ${{ github.ref }}
+          baseName=$(basename $tag)
+
+          if [[ $baseName =~ "beta" ]]; then
+            version=$(echo $baseName | grep -E "^v\d+.\d+.\d+-beta.\d+$")
+          else
+            version=$(echo $baseName | grep -E "^v\d+.\d+.\d+$")
+          fi
+
+          if [[ $version =  "" ]]; then
+            echo "No version number matched."
+            exit 1
+          fi
+
+          version=${version:1}
+
+          echo "Get version ${version}"
+
+          sed -i '' -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"${version}\"/" fourcats_connector/__init__.py
+
+          cat fourcats_connector/__init__.py
 
       - name: Set up Python
         uses: actions/setup-python@v3
