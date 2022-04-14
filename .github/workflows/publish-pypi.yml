@@ -23,14 +23,36 @@ jobs:
       - name: Pack
         id: pack
         run: |
-          cd ..
           baseName=$(basename "${{ github.ref }}")
+
+          if [[ "$baseName" =~ "beta" ]]; then
+            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+$")
+          else
+            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+$")
+          fi
+
+          if [[ "$version" == "" ]]; then
+            echo "No version number matched."
+            exit 1
+          fi
+
+          version=${version:1}
+
+          echo "$version"
+
+          echo "Get version $version"
+
+          sed -i -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"$version\"/" fourcats_connector/__init__.py
+
+          cat fourcats_connector/__init__.py
+
+          cd ..
           tarName="FourCats-Connector-1-$baseName.tar.gz"
           zipName="FourCats-Connector-1-$baseName.zip"
           tar -zcvf $tarName ./FourCats-Connector
           zip -r -q $zipName ./FourCats-Connector
           cp $tarName ./FourCats-Connector/$tarName
-          cp zipName ./FourCats-Connector/zipName
+          cp $zipName ./FourCats-Connector/$zipName
           echo ::set-output name=tarName::$tarName name=zipName::$zipName
 
       - name: Upload Tar
