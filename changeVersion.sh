@@ -18,6 +18,6 @@ echo "$version"
 
 echo "Get version $version"
 
-sed -i '' -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"$version\"/" fourcats_connector/__init__.py
+sed -i -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"$version\"/" __init__.py
 
 cat fourcats_connector/__init__.py
