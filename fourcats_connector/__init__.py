@@ -8,5 +8,5 @@ from ._mysql import MySQL
 from ._kafka import Kafka
 from ._mongo import MongoDB
 
-__version__ = "0.0.0"
+__version__ = "0.0.1-beta.2"
 __all__ = ("Redis", "Emqx", "MySQL", "Kafka", "MongoDB")
