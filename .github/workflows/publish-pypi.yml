@@ -30,7 +30,7 @@ jobs:
 
       - name: Change Version
         run: |
-          baseName=$(basename $tag)
+          baseName=$(basename ${{ github.ref }})
 
           if [[ $baseName =~ "beta" ]]; then
             version=$(echo $baseName | grep -E "^v\d+.\d+.\d+-beta.\d+$")
