@@ -32,15 +32,19 @@ jobs:
         run: |
           baseName=$(basename ${{ github.ref }})
 
+          echo $baseName
+
           if [[ $baseName =~ "beta" ]]; then
             version=$(echo $baseName | grep -E "^v\d+.\d+.\d+-beta.\d+$")
           else
             version=$(echo $baseName | grep -E "^v\d+.\d+.\d+$")
           fi
 
+          echo $version
+
           if [[ $version =  "" ]]; then
             echo "No version number matched."
-            exit 1
+            exit 8
           fi
 
           version=${version:1}
