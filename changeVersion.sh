@@ -10,5 +10,5 @@ else
 fi
 
 echo "Get version ${version}"
-echo "sed -e '/^__version__\s*=\s*[\'\"]([^\'\"]*)[\'\"]$/s//__version__ = '${version}'/g'"
-echo $(sed -e "/^__version__\s*=\s*[\'\"]([^\'\"]*)[\'\"]$/s//__version__ = "${version}"/g" fourcats_connector/__init__.py)
+echo "sed -e '/^__version__\s*=\s*[\'\"].*[\'\"]$/s//__version__ = '${version}'/g' fourcats_connector/__init__.py"
+echo $(sed -e "/__version__\s*=\s*[\'\"].*[\'\"]/s//__version__ = "${version}"/g" fourcats_connector/__init__.py)

@@ -9,7 +9,7 @@ from loguru import logger
 from fourcats_connector._check_requirement import CheckRequirement
 
 
-class MySQL:
+class MongoDB:
     """"""
 
     def __new__(cls, install: bool = False, pip_command: str = "pip", **kwargs):
