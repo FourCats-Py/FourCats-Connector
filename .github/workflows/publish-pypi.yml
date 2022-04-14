@@ -53,7 +53,8 @@ jobs:
           zip -r -q $zipName ./FourCats-Connector
           cp $tarName ./FourCats-Connector/$tarName
           cp $zipName ./FourCats-Connector/$zipName
-          echo ::set-output name=tarName::$tarName name=zipName::$zipName
+          echo ::set-output name=tarName::$tarName
+          echo ::set-output name=zipName::$zipName
 
       - name: Upload Tar
         uses: JasonEtco/upload-to-release@master
