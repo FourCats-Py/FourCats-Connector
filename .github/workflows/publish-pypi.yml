@@ -30,7 +30,7 @@ jobs:
 
       - name: Change Version
         run: |
-          echo ${{ github.ref }}
+          /bin/bash changeVersion.sh ${{ github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -46,13 +46,13 @@ jobs:
         run: |
           python setup.py sdist bdist_wheel
 
-      - name: Publish package
+      - name: Publish package To Pypi
         if: steps.check-tag.outputs.state == 'true'
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
-      - name: Publish Test package
+      - name: Publish package Test Pypi
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
