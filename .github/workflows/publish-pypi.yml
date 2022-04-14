@@ -67,12 +67,18 @@ jobs:
 
       - name: Publish package To Pypi
         if: steps.check-tag.outputs.state == 'true'
-        uses: pypa/gh-action-pypi-publish@master
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        run: |
+          echo Publish package Pypi
+          cat ./fourcats_connector/__init__.py
+#        uses: pypa/gh-action-pypi-publish@master
+#        with:
+#          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
       - name: Publish package Test Pypi
-        uses: pypa/gh-action-pypi-publish@master
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+        run: |
+          echo Publish package Test Pypi
+          cat ./fourcats_connector/__init__.py
+#        uses: pypa/gh-action-pypi-publish@master
+#        with:
+#          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+#          repository_url: https://test.pypi.org/legacy/
