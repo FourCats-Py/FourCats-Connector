@@ -1,12 +1,16 @@
 #!/bin/bash
 baseName=$(basename "$1")
 
-echo "$baseName"
-
 if [[ "$baseName" =~ "beta" ]]; then
+  echo "包含 beta"
+  echo "$baseName"
   version=$(echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$")
+  echo "$version"
 else
+  echo "不包含 beta"
+  echo "$baseName"
   version=$(echo "$baseName" | grep -E "^v\d+.\d+.\d+$")
+  echo "$version"
 fi
 
 echo "$version"
