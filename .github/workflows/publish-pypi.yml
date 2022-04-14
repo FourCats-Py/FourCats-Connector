@@ -30,6 +30,8 @@ jobs:
 
       - name: Change Version
         run: |
+          baseName=$(basename "${{ github.ref }}")
+          echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$"
           chmod +x changeVersion.sh
           ./changeVersion.sh ${{ github.ref }}
 
