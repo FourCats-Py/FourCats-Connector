@@ -4,6 +4,7 @@ baseName=$(basename "$1")
 if [[ "$baseName" =~ "beta" ]]; then
   echo "包含 beta"
   echo "$baseName"
+  echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$"
   version=$(echo "$baseName" | grep -E "^v\d+.\d+.\d+-beta.\d+$")
   echo "$version"
 else
