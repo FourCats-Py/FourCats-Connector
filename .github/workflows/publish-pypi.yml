@@ -33,15 +33,18 @@ jobs:
 
       - name: Upload Tar
         uses: JasonEtco/upload-to-release@master
+        run: |
+          echo tarName
+          echo ${{ steps.pack.outputs.tarName }}
         with:
-          args: $tarName application/octet-stream
+          args: ${{ steps.pack.outputs.tarName }} application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Zip
         uses: JasonEtco/upload-to-release@master
         with:
-          args: $zipName application/octet-stream
+          args: echo ${{ steps.pack.outputs.zipName }} application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
