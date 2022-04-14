@@ -1,3 +1,5 @@
+
+   
 # This workflow will upload a Python Package using Twine when a release is created
 # For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
 
@@ -23,38 +25,7 @@ jobs:
       - name: Pack
         id: pack
         run: |
-          baseName=$(basename "${{ github.ref }}")
-
-          if [[ "$baseName" =~ "beta" ]]; then
-            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+$")
-          else
-            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+$")
-          fi
-
-          if [[ "$version" == "" ]]; then
-            echo "No version number matched."
-            exit 1
-          fi
-
-          version=${version:1}
-
-          echo "$version"
-
-          echo "Get version $version"
-
-          sed -i -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"$version\"/" fourcats_connector/__init__.py
-
-          cat fourcats_connector/__init__.py
-
-          cd ..
-          tarName="FourCats-Connector-$version.tar.gz"
-          zipName="FourCats-Connector-$version.zip"
-          tar -zcvf $tarName ./FourCats-Connector
-          zip -r -q $zipName ./FourCats-Connector
-          cp $tarName ./FourCats-Connector/$tarName
-          cp $zipName ./FourCats-Connector/$zipName
-          echo ::set-output name=tarName::$tarName
-          echo ::set-output name=zipName::$zipName
+          ./extra_actions.sh ${{ github.ref }} changeVersion releasePack
 
       - name: Upload Tar
         uses: JasonEtco/upload-to-release@master
@@ -87,28 +58,7 @@ jobs:
 
       - name: Change Version
         run: |
-          baseName=$(basename "${{ github.ref }}")
-
-          if [[ "$baseName" =~ "beta" ]]; then
-            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+$")
-          else
-            version=$(echo "$baseName" | grep -E "^v[0-9]+.[0-9]+.[0-9]+$")
-          fi
-
-          if [[ "$version" == "" ]]; then
-            echo "No version number matched."
-            exit 1
-          fi
-
-          version=${version:1}
-
-          echo "$version"
-
-          echo "Get version $version"
-
-          sed -i -r "s/^__version__[[:space:]]+=[[:space:]]+[\'\"](.*)[\'\"]$/__version__ = \"$version\"/" fourcats_connector/__init__.py
-
-          cat fourcats_connector/__init__.py
+          ./extra_actions.sh ${{ github.ref }} changeVersion
 
       - name: Set up Python
         uses: actions/setup-python@v3
