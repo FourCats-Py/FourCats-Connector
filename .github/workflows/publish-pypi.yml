@@ -34,7 +34,7 @@ jobs:
       - name: Upload Tar
         uses: JasonEtco/upload-to-release@master
         run: |
-          echo tarName
+          echo $tarName
           echo ${{ steps.pack.outputs.tarName }}
         with:
           args: ${{ steps.pack.outputs.tarName }} application/octet-stream
