@@ -14,6 +14,19 @@ on:
       - created
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Pack
+        run: |
+          cd ..
+          ls
+          pwd
+
+
   deploy:
 
     runs-on: ubuntu-latest
