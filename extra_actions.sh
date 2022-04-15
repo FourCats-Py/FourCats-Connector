@@ -33,8 +33,8 @@ function releasePack() {
 
   cp -r ./FourCats-Connector ./"$newDirName"
 
-  tar -zcvf "$tarName" ./FourCats-Connector
-  zip -r -q "$zipName" ./FourCats-Connector
+  tar -zcvf "$tarName" ./"$newDirName"
+  zip -r -q "$zipName" ./"$newDirName"
 
   cp "$tarName" ./FourCats-Connector/"$tarName"
   cp "$zipName" ./FourCats-Connector/"$zipName"
