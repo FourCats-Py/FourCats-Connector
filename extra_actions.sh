@@ -27,9 +27,11 @@ function changeVersion() {
 
 function releasePack() {
   cd ..
-
+  newDirName="FourCats-Connector-$version"
   tarName="FourCats-Connector-$version.tar.gz"
   zipName="FourCats-Connector-$version.zip"
+
+  cp -r ./FourCats-Connector ./"$newDirName"
 
   tar -zcvf "$tarName" ./FourCats-Connector
   zip -r -q "$zipName" ./FourCats-Connector
